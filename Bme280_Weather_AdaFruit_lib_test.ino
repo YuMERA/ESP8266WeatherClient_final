@@ -101,7 +101,7 @@ void BMEsetup() {
 
   // suggested rate is 1/60Hz (1m)
   // delayTime = 60000; // in milliseconds
-  //t=1+[2xT]+[2xP+0.5]+[2xH+0.5]=1+2+2.5+2.5=13ms
+  // t=1+[2xT]+[2xP+0.5]+[2xH+0.5]=1+2+2.5+2.5=13ms
 }
 
 uint32_t calculateCRC32( const uint8_t *data, size_t length ) {
@@ -134,7 +134,7 @@ void setup() {
     if ( ESP.rtcUserMemoryRead( 0, (uint32_t*)&rtcData, sizeof( rtcData ) ) ) {
       // Calculate the CRC of what we just read from RTC memory, but skip the first 4 bytes as that's the checksum itself.
       uint32_t crc = calculateCRC32( ((uint8_t*)&rtcData) + 4, sizeof( rtcData ) - 4 );
-      if ( crc == rtcData.crc32 ) {
+      if (crc == rtcData.crc32) {
         rtcValid = true;
       }
     }  
@@ -271,7 +271,7 @@ void loop() {
     }else {                                                      //ako nema odgovora pokusavam dva puta
       http.end();                                                //slanje podataka a onda zatvaram konekciju
       httpLoop++;
-      if (httpLoop < 2){
+      if (httpLoop > 2){
         Serial.printf(" Error connection. Try again: %s\n", httpLoop);
         return;
       }else {
@@ -307,9 +307,9 @@ void WiFiBegin(){//Konekcija na WiFi ruter i provera uspesnosti konektovanja
 
     if (WiFi.status() != WL_CONNECTED) {  
         //WiFi.begin(ssid, password);
-        if ( rtcValid ) {
+        if (rtcValid) {
           // The RTC data was good, make a quick connection
-          WiFi.begin( ssid, password, rtcData.channel, rtcData.ap_mac, true );
+          WiFi.begin(ssid, password, rtcData.channel, rtcData.ap_mac, true);
           Serial.println("\n The RTC data was good, make a quick connection\n");
         }else {
           // The RTC data was not valid, so make a regular connection
@@ -321,7 +321,7 @@ void WiFiBegin(){//Konekcija na WiFi ruter i provera uspesnosti konektovanja
     for (count = 0; count < 30 ; count++) {
         int wifi_stat = WiFi.status();  
         Serial.printf("  Attempt: %d >> Wifi Status: %d\n", count, wifi_stat);
-        if ( wifi_stat == WL_CONNECTED ) break;
+        if (wifi_stat == WL_CONNECTED) break;
         delay(500);
     }
     Serial.println("");
@@ -339,9 +339,9 @@ void WiFiBegin(){//Konekcija na WiFi ruter i provera uspesnosti konektovanja
         // Write current connection info back to RTC
         Serial.println(" Write current connection info back to RTC");
         rtcData.channel = WiFi.channel();
-        memcpy( rtcData.ap_mac, WiFi.BSSID(), 6 ); // Copy 6 bytes of BSSID (AP's MAC address)
-        rtcData.crc32 = calculateCRC32( ((uint8_t*)&rtcData) + 4, sizeof( rtcData ) - 4 );
-        ESP.rtcUserMemoryWrite( 0, (uint32_t*)&rtcData, sizeof( rtcData ) );
+        memcpy(rtcData.ap_mac, WiFi.BSSID(), 6); // Copy 6 bytes of BSSID (AP's MAC address)
+        rtcData.crc32 = calculateCRC32(((uint8_t*)&rtcData) + 4, sizeof( rtcData ) - 4);
+        ESP.rtcUserMemoryWrite(0, (uint32_t*)&rtcData, sizeof(rtcData));
     }
     else {
         Serial.println(" Client !!!NOT!!! connected");
