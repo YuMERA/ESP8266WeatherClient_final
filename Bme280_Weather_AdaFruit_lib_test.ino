@@ -60,16 +60,16 @@
     volatile unsigned long sTime = 0;
     volatile float pulseTime = 0;         //stores time between one anemomter relay closing and the next
     const unsigned long timeout = 3000;   //timeout u milisekundama 
-    float Tem=0.0;                        //Temperatura DS18B20
-    float Hum=0.0;                        //Vlaznost vazduha
-    float Pre=0.0;                        //Pritisak vazduha
-    float Vcc=0.0;                        //Napon napajanja
-    int Rsi=0;                            //Jacina WiFi Signala
-    float TemBME=0.0;                     //Temperatura izmerena na senzoru pritiska
+    float Tem = 0.0;                      //Temperatura DS18B20
+    float Hum = 0.0;                      //Vlaznost vazduha
+    float Pre = 0.0;                      //Pritisak vazduha
+    float Vcc = 0.0;                      //Napon napajanja
+    int   Rsi = 0;                        //Jacina WiFi Signala
+    float TemBME = 0.0;                   //Temperatura izmerena na senzoru pritiska
     float Win = 0.0;                      //Brzina Vetra
     float Slp = 0.0;                      //SeaLevelPreassure
     int sleepTimes ;                      //Time to sleep (in seconds):
-    int httpLoop= 0;                      //Broj koji odredjuj broj petlji dok se ne posalju podaci
+    int httpLoop = 0;                     //Broj koji odredjuj broj petlji dok se ne posalju podaci
     #define INTERVAL_NRM  600             //normal wake up interval in seconds
     #define INTERVAL_LOW  900             //wake up interval when low battery
     #define INTERVAL_CRT 1200             //wake up intrrval when crtical battery
