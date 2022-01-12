@@ -1,6 +1,6 @@
 /*
 |======================================|
-|  Weather WiFi Client v1.1 By YuMERA  |
+|  Weather WiFi Client v1.1 By me[R]a  |
 |  31-Dec-2020. 13:39                  | 
 |  Sid                                 |
 |======================================|
